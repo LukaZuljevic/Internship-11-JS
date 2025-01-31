@@ -5,8 +5,8 @@ const thirdCategory = [];
 const fourthCategory = [];
 
 do {
-  const name = prompt("Unesi ime studenta").trim();
-  const surname = prompt("Unesi prezime studenta").trim();
+  const name = getValidTextInput("Unesi ime studenta");
+  const surname = getValidTextInput("Unesi prezime studenta");
   const points = getValidPoints("Unesi broj bodova studenta");
 
   const student = {
@@ -35,15 +35,6 @@ averagePointsByCategory(firstCategory, "Prva kategorija");
 averagePointsByCategory(secondCategory, "Druga kategorija");
 averagePointsByCategory(thirdCategory, "Treca kategorija");
 averagePointsByCategory(fourthCategory, "Cetvrta kategorija");
-
-function getValidPoints(promptString) {
-  let points;
-  do {
-    points = prompt(promptString).trim();
-    points = parseFloat(points);
-  } while (!(points >= 0 && points <= 100) || isNaN(points));
-  return points;
-}
 
 function sortByCategory() {
   students.forEach((student) => {
@@ -84,4 +75,29 @@ function averagePointsByCategory(students, categoryName) {
   console.log(
     `Prosjek bodova u kategoriji ${categoryName} je: ${averagePoints}`
   );
+}
+
+function getValidPoints(promptString) {
+  let points;
+  do {
+    points = prompt(promptString).trim();
+    points = parseFloat(points);
+
+    if (!(points >= 0 && points <= 100) || isNaN(points))
+      alert("Bodovi moraju biti broj veci od 0 i manji od 100");
+  } while (!(points >= 0 && points <= 100) || isNaN(points));
+
+  return points;
+}
+
+function getValidTextInput(promptString) {
+  let text;
+
+  do {
+    text = prompt(promptString).trim().toLowerCase();
+
+    if (text === "") alert("Polje ne smije biti prazno");
+  } while (text === "");
+
+  return text;
 }

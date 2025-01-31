@@ -1,11 +1,11 @@
 const industries = [];
 
 do {
-  const name = prompt("Unesite ime radnika").trim();
-  const surname = prompt("Unesite prezime radnika").trim();
-  const industryName = prompt("Unesite industriju u kojoj radi radnik")
-    .trim()
-    .toUpperCase();
+  const name = getValidTextInput("Unesite ime radnika");
+  const surname = getValidTextInput("Unesite prezime radnika");
+  const industryName = getValidTextInput(
+    "Unesite industriju u kojoj radi radnik"
+  );
   const salary = getValidSalary("Unesite placu radnika");
 
   const worker = {
@@ -72,7 +72,21 @@ function getValidSalary(promptString) {
   do {
     salary = prompt(promptString).trim();
     salary = parseFloat(salary);
+
+    if (isNaN(salary) || salary < 0) alert("Placa mora biti broj veci od 0");
   } while (isNaN(salary) || salary < 0);
 
   return salary;
+}
+
+function getValidTextInput(promptString) {
+  let text;
+
+  do {
+    text = prompt(promptString).trim().toLowerCase();
+
+    if (text === "") alert("Polje ne smije biti prazno");
+  } while (text === "");
+
+  return text;
 }

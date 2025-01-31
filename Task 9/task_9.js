@@ -1,7 +1,7 @@
 const cities = [];
 
 do {
-  const city = prompt("Enter city name");
+  const city = getValidTextInput("Enter city name");
   cities.push(city);
 } while (confirm("Zelis li nastaviti?"));
 
@@ -22,3 +22,15 @@ saveButton.addEventListener("click", () => {
   link.download = "cities.txt";
   link.click();
 });
+
+function getValidTextInput(promptString) {
+  let text;
+
+  do {
+    text = prompt(promptString).trim().toLowerCase();
+
+    if (text === "") alert("Polje ne smije biti prazno");
+  } while (text === "");
+
+  return text;
+}

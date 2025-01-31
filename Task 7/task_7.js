@@ -1,8 +1,7 @@
 let n;
 
 do {
-  n = prompt("Unesi broj: ").trim();
-  n = parseInt(n);
+  n = getValidNumber("Unesi broj: ");
 } while (isNaN(n) || n < 0);
 
 const squares = new Array(n).fill(0).map((_, i) => Math.pow(i + 1, 2));
@@ -21,3 +20,14 @@ console.log(squares);
 console.log("Ukupna vrijednost: " + totalValue);
 console.log("Prosjecna vrijednost: " + averageValue);
 console.log("Medijan: " + median);
+
+function getValidNumber(promptString) {
+  let number;
+  do {
+    number = prompt(promptString).trim();
+    number = parseFloat(number);
+
+    if (isNaN(number) || number < 0) alert("Broj mora biti broj veci od 0");
+  } while (isNaN(number) || number < 0);
+  return number;
+}

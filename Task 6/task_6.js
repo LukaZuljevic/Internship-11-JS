@@ -1,7 +1,7 @@
 const equipment = [];
 
 do {
-  const name = prompt("Unesite naziv opreme:");
+  const name = getValidTextInput("Unesite naziv opreme:");
   const price = getValidPrice("Unesite cijenu opreme:");
   let status = confirm("Je li oprema dostupna?");
 
@@ -73,7 +73,21 @@ function getValidPrice(promptString) {
   do {
     price = prompt(promptString).trim();
     price = parseFloat(price);
+
+    if (isNaN(price) || price < 0) alert("Cijena mora biti broj veci od 0");
   } while (isNaN(price) || price < 0);
 
   return price;
+}
+
+function getValidTextInput(promptString) {
+  let text;
+
+  do {
+    text = prompt(promptString).trim().toLowerCase();
+
+    if (text === "") alert("Polje ne smije biti prazno");
+  } while (text === "");
+
+  return text;
 }

@@ -1,9 +1,9 @@
 const books = [];
 
 do {
-  const title = prompt("Unesi naslov knjige").trim();
+  const title = getValidTextInput("Unesi naslov knjige");
   let price = getValidPrice("Unesi cijenu knjige");
-  const genre = prompt("Unesi zanr knjige").trim();
+  const genre = getValidTextInput("Unesi zanr knjige");
 
   const book = {
     title: title,
@@ -52,7 +52,21 @@ function getValidPrice(promptString) {
   do {
     price = prompt(promptString).trim();
     price = parseFloat(price);
+
+    if (isNaN(price) || price < 0) alert("Cijena mora biti broj veci od 0");
   } while (isNaN(price) || price < 0);
 
   return price;
+}
+
+function getValidTextInput(promptString) {
+  let text;
+
+  do {
+    text = prompt(promptString).trim().toLowerCase();
+
+    if (text === "") alert("Polje ne smije biti prazno");
+  } while (text === "");
+
+  return text;
 }

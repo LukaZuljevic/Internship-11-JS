@@ -2,8 +2,8 @@ const plants = [];
 const colors = [];
 
 do {
-  const name = prompt("Unesite ime biljke").trim();
-  const color = prompt("Unesite boju biljke").trim().toLowerCase();
+  const name = getValidTextInput("Unesite ime biljke");
+  const color = getValidTextInput("Unesite boju biljke");
   const calories = getValidCalories("Unesi kalorije biljke");
 
   const plant = {
@@ -59,6 +59,21 @@ function getValidCalories(promptString) {
   do {
     calories = prompt(promptString).trim();
     calories = parseFloat(calories);
+
+    if (isNaN(calories) || calories < 0)
+      alert("Kalorije moraju biti broj veci od 0");
   } while (isNaN(calories) || calories < 0);
   return calories;
+}
+
+function getValidTextInput(promptString) {
+  let text;
+
+  do {
+    text = prompt(promptString).trim().toLowerCase();
+
+    if (text === "") alert("Polje ne smije biti prazno");
+  } while (text === "");
+
+  return text;
 }
